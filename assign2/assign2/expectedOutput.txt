@@ -1,0 +1,31 @@
+Number of gates in the circuit is  5
+Read in gate  "AND1"  with inputs  -1 , -1
+Read in gate  "ANDgatea"  with inputs  0 , -1
+Read in gate  "AND2"  with inputs  0 , 1
+Read in gate  "ANDgateb"  with inputs  -1 , 2
+Read in gate  "And6"  with inputs  3 , 2
+WARNING: Cannot evaluate gate  "AND1" : Input One is not specified.  Value returned will be meaningless.
+WARNING: Cannot evaluate gate  "AND1" : Input Two is not specified.  Value returned will be meaningless.
+The output of AND1 is 0
+InputOne   of gate  "AND1"  set to  0
+InputTwo   of gate  "AND1"  set to  1
+The output of AND1 is 0
+InputOne   of gate  "AND1"  set to  1
+InputTwo   of gate  "AND1"  set to  1
+The output of AND1 is 1
+InputTwo   of gate  "ANDgatea"  set to  1
+The output of ANDgatea is 1
+WARNING: Cannot evaluate gate  "ANDgateb" : Input One is not specified.  Value returned will be meaningless.
+The output of And6 is 0
+WARNING: Input Two of gate  "ANDgateb"  is already set to  "AND2" : Cannot set to a boolean value
+InputTwo   of gate  "ANDgateb"  set to  0
+InputOne   of gate  "ANDgateb"  set to  1
+The output of And6 is 1
+InputOne   of gate  "AND1"  set to  0
+The output of And6 is 0
+Sorted Gate List:
+AND1 has inputs False, True
+AND2 has inputs AND1, ANDgatea
+ANDgatea has inputs AND1, True
+ANDgateb has inputs True, AND2
+And6 has inputs ANDgateb, AND2

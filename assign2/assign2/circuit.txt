@@ -1,0 +1,21 @@
+5
+AND1 -1 -1
+ANDgatea 0 -1
+AND2 0 1
+ANDgateb -1 2
+And6 3 2
+EVAL 0
+Set 0 1 0
+Set 0 2 1
+EVAL 0
+Set 0 1 1
+Set 0 2 1
+EVAL 0
+set 1 2 1
+eVal 1
+Eval 4
+sEt 3 2 0
+SET 3 1 1
+Eval 4
+set 0 1 0
+Eval 4
