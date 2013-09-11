@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'testproffunc.cpp'
 **
-** Created: Thu Sep 5 23:06:11 2013
+** Created: Tue Sep 10 23:47:04 2013
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.1)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -37,7 +37,7 @@ static const uint qt_meta_data_TestProfFunc[] = {
 };
 
 static const char qt_meta_stringdata_TestProfFunc[] = {
-    "TestProfFunc\0\0toUpper_data()\0toUpper()\0"
+    "TestProfFunc\0\0proFunc_data()\0proFunc()\0"
 };
 
 void TestProfFunc::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -46,8 +46,8 @@ void TestProfFunc::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         Q_ASSERT(staticMetaObject.cast(_o));
         TestProfFunc *_t = static_cast<TestProfFunc *>(_o);
         switch (_id) {
-        case 0: _t->toUpper_data(); break;
-        case 1: _t->toUpper(); break;
+        case 0: _t->proFunc_data(); break;
+        case 1: _t->proFunc(); break;
         default: ;
         }
     }
