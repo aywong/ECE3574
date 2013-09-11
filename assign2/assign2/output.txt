@@ -1,0 +1,21 @@
+Number of gates in the circuit is 5
+Read in gate AND1 with inputs -1 , -1
+Read in gate ANDgatea with inputs 0 , -1
+Read in gate AND2 with inputs 0 , 1
+Read in gate ANDgateb with inputs -1 , 2
+Read in gate And6 with inputs 3 , 2
+And6||And6
+And6||And6
+And6||And6
+And6||And6
+And6||And6
+And6||And6
+And6||And6
+And6||And6
+And6||And6
+And6||And6
+And6||And6
+And6||And6
+And6||And6
+And6||And6
+And6||And6

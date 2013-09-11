@@ -3,6 +3,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QDebug>
+#include <QStringList>
 
 // Your program must do the following (and meet the other requirements for the assignment):
 // Step 1: Read in an integer that is the number of two input "AND" gates in the circuit from the text file "circuit.txt"
@@ -58,25 +59,70 @@ bool gateLessThan(andGate *g1,andGate *g2)
 int main()
 {
     QList<andGate*> andGateList;
-    QFile input("circuit.txt");
-    QFile output("output.txt");
+    QFile inputFile("circuit.txt");
+    QFile outputFile("output.txt");
 
-    if (!input.open(QIODevice::ReadOnly | QIODevice::Text)){
-        qDebug() << "input file did not open";
-    }
-    QTextStream in(&input);
+    QList<QString> inputParameters; // input lines split
+    int lineNumber = 0; // keep track of what line reading
+    int andGateCount = 0; // number of gates
+    bool inputOneCorrect = true;
+    bool inputTwoCorrect = true;
 
+    if (inputFile.open(QIODevice::ReadOnly | QIODevice::Text)){
+        if(!outputFile.open(QIODevice::WriteOnly | QIODevice::Text)) qDebug() << "output file did not open";
+        QTextStream input(&inputFile);
+        QTextStream output(&outputFile);
 
-    in.readAll();
+        while(!input.atEnd()){
+            QString line = input.readLine();
 
-    input.close();
+            if (lineNumber == 0){
+                andGateCount = line.toInt();
+                Q_ASSERT(andGateCount > 0);
 
-    output.open(QIODevice::WriteOnly | QIODevice::Text);
+                output << "Number of gates in the circuit is " << andGateCount << "\n";
+            }
+            else if (lineNumber <= andGateCount){
+                inputParameters = line.split(" ");
+                Q_ASSERT(inputParameters.size() == 3);
 
-    QTextStream out(&output);
-    out << "this is and output";
+                andGate gate;
+                andGateList.append(&gate);
 
-    output.close();
+                gate.init();
+                gate.setName(inputParameters[0]);
+
+                if((inputParameters[1].toInt() > -1) && (inputParameters[1].toInt() < lineNumber)){
+                    gate.setInputOne(andGateList[inputParameters[1].toInt()]);
+                }else if (inputParameters[1].toInt() < -1){
+                    output << "WARNING: Input one out of range (less than -2, or greater than number of defined gates) \n";
+                    inputOneCorrect = false;
+                }
+
+                if((inputParameters[2].toInt() > -1) && (inputParameters[2].toInt() < lineNumber)){
+                    gate.setInputTwo(andGateList[inputParameters[2].toInt()]);
+                }else if (inputParameters[2].toInt() < -1){
+                    output << "WARNING: Input two out of range (less than -2, or greater than number of defined gates) \n";
+                    inputTwoCorrect = false;
+                }
+
+                if(inputOneCorrect && inputTwoCorrect){
+                    output << "Read in gate " << andGateList[lineNumber - 1]->getName() << " with inputs " << inputParameters[1] << " , " << inputParameters[2] << "\n";
+                }
+
+                inputOneCorrect = true;
+                inputTwoCorrect = true;
+            }
+            else{
+                output << andGateList[0]->getName() << "||" << andGateList[0]->getName() << "\n";
+            }
+            lineNumber++;
+        }
+
+    } else qDebug() << "input file did not open";
+
+    inputFile.close();
+    outputFile.close();
 
 
 
