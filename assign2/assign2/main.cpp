@@ -83,7 +83,7 @@ int main()
                 output << "Number of gates in the circuit is " << andGateCount << "\n";
             }
             else if (lineNumber <= andGateCount){
-                inputParameters = line.split(" ");
+                inputParameters = line.split(" ", QString::SkipEmptyParts);
                 Q_ASSERT(inputParameters.size() == 3);
 
                 andGate gate;
@@ -96,6 +96,7 @@ int main()
                     gate.setInputOne(andGateList[inputParameters[1].toInt()]);
                 }else if (inputParameters[1].toInt() < -1){
                     output << "WARNING: Input one out of range (less than -2, or greater than number of defined gates) \n";
+                    qDebug() << "WARNING: Input one out of range (less than -2, or greater than number of defined gates) \n";
                     inputOneCorrect = false;
                 }
 
@@ -103,6 +104,7 @@ int main()
                     gate.setInputTwo(andGateList[inputParameters[2].toInt()]);
                 }else if (inputParameters[2].toInt() < -1){
                     output << "WARNING: Input two out of range (less than -2, or greater than number of defined gates) \n";
+                    qDebug() << "WARNING: Input two out of range (less than -2, or greater than number of defined gates) \n";
                     inputTwoCorrect = false;
                 }
 
@@ -114,7 +116,27 @@ int main()
                 inputTwoCorrect = true;
             }
             else{
-                output << andGateList[0]->getName() << "||" << andGateList[0]->getName() << "\n";
+                inputParameters = line.split(" ", QString::SkipEmptyParts, Qt::CaseInsensitive);
+
+                if(inputParameters[0] == "EVAL"){
+                    Q_ASSERT(inputParameters.size() == 2);
+                    if((inputParameters[1].toInt() > -1) && (inputParameters[1].toInt() < andGateCount)){
+                        andGateList[inputParameters[1].toInt()]->eval();
+                    }else qDebug() << "Out of range eval parameter (either less than 0 or greater than number of gates)";
+                }
+                else if(inputParameters[0] == "SET"){
+                    Q_ASSERT(inputParameters.size() == 4);
+
+                    if((inputParameters[3].toInt() > -1) && (inputParameters[3].toInt() < andGateCount)){
+                        if(inputParameters[2].toInt() == 1){
+                                andGateList[inputParameters[1].toInt()]->setInputOne(andGateList[inputParameters[3].toInt()]);
+                        }else if(inputParameters[2].toInt() == 2){
+                                andGateList[inputParameters[1].toInt()]->setInputTwo(andGateList[inputParameters[3].toInt()]);
+                        }
+                    }else qDebug() << "Out of range set parameter (either less than 0 or greater than number of gates)";
+                }
+
+               output << andGateList[0]->getName() << "||" << &andGateList[1] << "||" << &andGateList[2] << "||" << &andGateList[3] << "||" << &inputParameters[0] << "\n";
             }
             lineNumber++;
         }
