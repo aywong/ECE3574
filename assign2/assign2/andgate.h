@@ -36,7 +36,23 @@ public:
     //     (c) continue execution
     bool eval() const;
 private:
-    // Define the private data members that you need here
+    // pointer to input one and two andGates
+    andGate *inOne;
+    andGate *inTwo;
+
+    bool inOneBool;
+    bool inTwoBool;
+
+    // This andGate name
+    QString name;
+
+    // Input one and two andGate names
+    QString inOneName;
+    QString inTwoName;
+
+    // TRUE if input one (two) of andGate already set to another andGate else false
+    bool inOneSet;
+    bool inTwoSet;
 };
 
 #endif // ANDGATE_H

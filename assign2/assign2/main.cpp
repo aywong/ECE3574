@@ -1,4 +1,9 @@
 #include "andgate.h"
+#include <QList>
+#include <QFile>
+#include <QTextStream>
+#include <QDebug>
+
 // Your program must do the following (and meet the other requirements for the assignment):
 // Step 1: Read in an integer that is the number of two input "AND" gates in the circuit from the text file "circuit.txt"
 // Step 2: If there are N "AND" gates, then you will read in N AND gates from "circuit.txt", where the input for the ith gate is
@@ -52,6 +57,28 @@ bool gateLessThan(andGate *g1,andGate *g2)
 
 int main()
 {
+    QList<andGate*> andGateList;
+    QFile input("circuit.txt");
+    QFile output("output.txt");
+
+    if (!input.open(QIODevice::ReadOnly | QIODevice::Text)){
+        qDebug() << "input file did not open";
+    }
+    QTextStream in(&input);
+
+
+    in.readAll();
+
+    input.close();
+
+    output.open(QIODevice::WriteOnly | QIODevice::Text);
+
+    QTextStream out(&output);
+    out << "this is and output";
+
+    output.close();
+
+
 
     return 0;
 }
