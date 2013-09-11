@@ -127,13 +127,22 @@ int main()
                 else if(inputParameters[0] == "SET"){
                     Q_ASSERT(inputParameters.size() == 4);
 
-                    if((inputParameters[3].toInt() > -1) && (inputParameters[3].toInt() < andGateCount)){
-                        if(inputParameters[2].toInt() == 1){
-                                andGateList[inputParameters[1].toInt()]->setInputOne(andGateList[inputParameters[3].toInt()]);
-                        }else if(inputParameters[2].toInt() == 2){
-                                andGateList[inputParameters[1].toInt()]->setInputTwo(andGateList[inputParameters[3].toInt()]);
-                        }
-                    }else qDebug() << "Out of range set parameter (either less than 0 or greater than number of gates)";
+
+                    if((inputParameters[1].toInt() > -1) && (inputParameters[1].toInt() < andGateCount)){
+                        if((inputParameters[3].toInt() == 1)){
+                            if(inputParameters[2].toInt() == 1){
+                                    andGateList[inputParameters[1].toInt()]->setInputOne(true);
+                            }else if(inputParameters[2].toInt() == 2){
+                                    andGateList[inputParameters[1].toInt()]->setInputTwo(true);
+                            }
+                        }else if((inputParameters[3].toInt() == 0)){
+                            if(inputParameters[2].toInt() == 1){
+                                    andGateList[inputParameters[1].toInt()]->setInputOne(false);
+                            }else if(inputParameters[2].toInt() == 2){
+                                    andGateList[inputParameters[1].toInt()]->setInputTwo(false);
+                            }
+                        }else output << "Set Input parameter needs to me either 1 or 0";
+                    }else output << "Out of range set parameter (either less than 0 or greater than number of gates)";
                 }
 
                output << andGateList[0]->getName() << "||" << &andGateList[1] << "||" << &andGateList[2] << "||" << &andGateList[3] << "||" << &inputParameters[0] << "\n";
